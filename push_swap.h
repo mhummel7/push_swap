@@ -6,7 +6,7 @@
 /*   By: mhummel <mhummel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 12:50:43 by mhummel           #+#    #+#             */
-/*   Updated: 2024/05/16 10:49:13 by mhummel          ###   ########.fr       */
+/*   Updated: 2024/05/17 13:05:28 by mhummel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,18 @@
 # define PUSH_SWAP_H
 
 # include "libft/libft.h"
-
-# include <stdio.h>
-# include <stdlib.h>
-# include <signal.h>
-# include <unistd.h>
-# include <sys/types.h>
+# include <limits.h>
 
 typedef struct s_list
 {
-	int data;
-	struct s_list *next;
-}	t_list;
+	int				data;
+	struct s_list	*next;
+}					t_list;
 
 typedef struct s_stack
 {
-	t_list *top;
-	int size;
-}	t_stack;
+	t_list			*top;
+	int				size;
+}					t_stack;
 
 #endif
