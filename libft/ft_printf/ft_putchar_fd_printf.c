@@ -1,40 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ra_rb_rr.c                                         :+:      :+:    :+:   */
+/*   ft_putchar_fd_printf.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mhummel <mhummel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/16 10:58:26 by mhummel           #+#    #+#             */
-/*   Updated: 2024/05/17 12:13:13 by mhummel          ###   ########.fr       */
+/*   Created: 2024/03/14 11:38:43 by mhummel           #+#    #+#             */
+/*   Updated: 2024/07/02 09:55:25 by mhummel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "ft_printf.h"
 
-void	ra(t_stack *stack_a)
+int	ft_putchar_fd_printf(char c, int fd)
 {
-	t_list	*tmp;
-	t_list	*last;
-
-	if (stack_a->size < 2)
-		return ;
-	tmp = stack_a->top;
-	stack_a->top = stack_a->top->next;
-	last = stack_a->top;
-	while (last->next)
-		last = last->next;
-	last->next = tmp;
-	tmp->next = NULL;
-}
-
-void	rb(t_stack *stack_b)
-{
-	ra(stack_b);
-}
-
-void	rr(t_stack *stack_a, t_stack *stack_b)
-{
-	ra(stack_a);
-	rb(stack_b);
+	if (ft_error_printf(0, 0) == 0)
+		ft_error_printf(write(fd, &c, 1), 0);
+	return (1);
 }

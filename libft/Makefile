@@ -6,7 +6,7 @@
 #    By: mhummel <mhummel@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/13 11:03:31 by mhummel           #+#    #+#              #
-#    Updated: 2024/04/29 11:23:01 by mhummel          ###   ########.fr        #
+#    Updated: 2024/07/03 09:57:14 by mhummel          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,9 @@ CC = cc
 CFLAGS = -Wall -Wextra -Werror
 AR = ar
 
-CFILES =	ft_atoi.c \
+# Libft files
+LIBFT_DIR = libft/
+LIBFT_FILES =	ft_atoi.c \
 			ft_bzero.c \
 			ft_calloc.c \
 			ft_isalnum.c \
@@ -50,22 +52,48 @@ CFILES =	ft_atoi.c \
 			ft_striteri.c \
 			ft_split.c \
 			ft_strcpy.c \
+			ft_strncpy.c
 
-OFILES = $(CFILES:.c=.o)
+# ft_printf files
+FT_PRINTF_DIR = ft_printf/
+FT_PRINTF_FILES =	ft_printf.c \
+			ft_putchar_fd_printf.c \
+			ft_putstr_fd_printf.c \
+			ft_putnbr_fd_printf.c \
+			ft_putnbr_base_p_printf.c \
+			ft_putnbr_base_u_printf.c \
+			ft_putnbr_base_x_printf.c \
+			ft_strlen_printf.c \
+			ft_error_printf.c
+
+# get_next_line files
+GNL_DIR = get_next_line/
+GNL_FILES =	get_next_line.c \
+			get_next_line_utils.c
+
+SRCS =	$(addprefix $(LIBFT_DIR), $(LIBFT_FILES)) \
+		$(addprefix $(FT_PRINTF_DIR), $(FT_PRINTF_FILES)) \
+		$(addprefix $(GNL_DIR), $(GNL_FILES))
+
+OBJS= $(SRCS:.c=.o)
 
 all: $(NAME)
 
-$(NAME): $(OFILES)
-	$(AR) -r $@ $?
+$(NAME): $(OBJS)
+	@$(AR) -r $@ $?
 
 %.o: %.c
-	$(CC) -c $(CFLAGS) $?
+	@$(CC) $(CFLAGS) -c $< -o $@ -I$(LIBFT_DIR) -I$(FT_PRINTF_DIR) -I$(GNL_DIR)
+	@echo "\033[32m" Compiled "$<" "\033[0m"
 
 clean:
-	rm -f $(OFILES)
+	@rm -f $(OBJS)
+	@echo "\033[38;5;214m" Cleaned libft"\033[0m"
 
-fclean: clean
-	rm -f $(NAME)
+fclean:
+	@rm -f $(OBJS)
+	@rm -f $(NAME)
+	@echo "\033[38;5;214m" Fcleaned $(NAME) "\033[0m"
 
 re: fclean all
 

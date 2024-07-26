@@ -1,26 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putchar_fd_printf.c                             :+:      :+:    :+:   */
+/*   ft_strncpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mhummel <mhummel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/14 11:38:43 by mhummel           #+#    #+#             */
-/*   Updated: 2024/04/29 11:19:30 by mhummel          ###   ########.fr       */
+/*   Created: 2024/07/02 09:25:08 by mhummel           #+#    #+#             */
+/*   Updated: 2024/07/02 09:27:54 by mhummel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
-int	ft_putchar_fd_printf(char c, int fd)
+void	ft_strncpy(char *dst, const char *src, size_t len)
 {
-	if (ft_error_printf(0, 0) == 0)
-		ft_error_printf(write(fd, &c, 1), 0);
-	return (1);
-}
+	size_t	i;
 
-// int main()
-// {
-// 	char c = 'A';
-// 	ft_putchar_fd(c, 1);
-// }
+	i = 0;
+	while (i < len && src[i])
+	{
+		dst[i] = src[i];
+		i++;
+	}
+	while (i < len)
+	{
+		dst[i] = '\0';
+		i++;
+	}
+}

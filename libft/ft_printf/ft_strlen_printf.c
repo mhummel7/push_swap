@@ -6,7 +6,7 @@
 /*   By: mhummel <mhummel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 09:54:40 by mhummel           #+#    #+#             */
-/*   Updated: 2024/04/29 10:54:16 by mhummel          ###   ########.fr       */
+/*   Updated: 2024/07/02 09:55:41 by mhummel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,3 @@ size_t	ft_strlen_printf(const char *s)
 	}
 	return (i);
 }
-
-// #include <stdio.h>
-// #include <string.h>
-
-// int main()
-// {
-// 	printf("%d \n", ft_strlen("HelloWorld"));
-// 	printf("%lu \n", strlen("HelloWorld"));
-// }

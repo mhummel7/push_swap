@@ -6,7 +6,7 @@
 /*   By: mhummel <mhummel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 13:13:00 by mhummel           #+#    #+#             */
-/*   Updated: 2024/04/29 10:41:01 by mhummel          ###   ########.fr       */
+/*   Updated: 2024/07/02 09:26:57 by mhummel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,5 +54,6 @@ char	*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 void	ft_striteri(char *s, void (*f)(unsigned int, char*));
 char	**ft_split(char const *s, char c);
 size_t	ft_strcpy(char *dst, const char *src);
+void	ft_strncpy(char *dst, const char *src, size_t len);
 
 #endif
