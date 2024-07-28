@@ -6,7 +6,7 @@
 /*   By: mhummel <mhummel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 12:50:43 by mhummel           #+#    #+#             */
-/*   Updated: 2024/07/26 11:56:19 by mhummel          ###   ########.fr       */
+/*   Updated: 2024/07/27 16:23:11 by mhummel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include "../libft/libft/libft.h"
 # include "../libft/ft_printf/ft_printf.h"
-# include "../libft/get_next_line/get_next_line.c"
+# include "../libft/get_next_line/get_next_line.h"
 # include <limits.h>
 # include <stdio.h>
 # include <stdlib.h>
@@ -56,6 +56,21 @@ int		is_sorted(t_stack *stack);
 t_stack	*process_input(int argc, char **argv);
 
 // Sorting algorithm
-void sort_stack(t_stack *stack_a, t_stack *stack_b);
+void	sort_stack(t_stack *stack_a, t_stack *stack_b);
+int		find_cheapest_number(t_stack *stack_a, t_stack *stack_b);
+void	move_number(t_stack *stack_a, t_stack *stack_b, int num);
+void	sort_three(t_stack *stack);
+int		find_best_position(t_stack *stack, int num);
+void	move_to_position(t_stack *stack, int position);
+int		get_target_position(t_stack *stack_b, int num);
+int		get_position(t_stack *stack, int num);
+void	move_smallest_to_top(t_stack *stack);
+int		find_max(t_stack *stack);
+int		calculate_cost(t_stack *stack_a, t_stack *stack_b, int num);
+int		ft_max(int a, int b);
+int		ft_abs(int n);
+int		find_smallest(t_stack *stack);
+void	sort_small_stack(t_stack *stack);
+void	print_stack(t_stack *stack);
 
 #endif

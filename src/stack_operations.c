@@ -6,7 +6,7 @@
 /*   By: mhummel <mhummel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 09:42:06 by mhummel           #+#    #+#             */
-/*   Updated: 2024/07/03 09:45:40 by mhummel          ###   ########.fr       */
+/*   Updated: 2024/07/27 16:53:05 by mhummel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,17 +24,18 @@ t_stack	*create_stack(void)
 	return (stack);
 }
 
-void	push(t_stack *stack, int data)
+void push(t_stack *stack, int data)
 {
-	t_list	*new_node;
+    t_list *new_node;
 
-	new_node = (t_list *)malloc(sizeof(t_list));
-	if (!new_node)
-		return ;
-	new_node->data = data;
-	new_node->next = stack->top;
-	stack->top = new_node;
-	stack->size++;
+    new_node = (t_list *)malloc(sizeof(t_list));
+    if (!new_node)
+        return;
+    new_node->data = data;
+    new_node->next = stack->top;
+    stack->top = new_node;
+    stack->size++;
+    // ft_printf("Pushed %d onto the stack\n", data);
 }
 
 int	pop(t_stack *stack)
