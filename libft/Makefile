@@ -6,11 +6,11 @@
 #    By: mhummel <mhummel@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/13 11:03:31 by mhummel           #+#    #+#              #
-#    Updated: 2024/07/03 09:57:14 by mhummel          ###   ########.fr        #
+#    Updated: 2024/07/30 13:02:00 by mhummel          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = libft.a
+NAME = libft/libft.a
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
 AR = ar
@@ -52,7 +52,16 @@ LIBFT_FILES =	ft_atoi.c \
 			ft_striteri.c \
 			ft_split.c \
 			ft_strcpy.c \
-			ft_strncpy.c
+			ft_strncpy.c \
+			ft_lstadd_back_bonus.c \
+			ft_lstadd_front_bonus.c \
+			ft_lstclear_bonus.c \
+			ft_lstdelone_bonus.c \
+			ft_lstiter_bonus.c \
+			ft_lstlast_bonus.c \
+			ft_lstmap_bonus.c \
+			ft_lstnew_bonus.c \
+			ft_lstsize_bonus.c
 
 # ft_printf files
 FT_PRINTF_DIR = ft_printf/
