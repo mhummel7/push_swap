@@ -6,7 +6,7 @@
 /*   By: mhummel <mhummel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 11:32:15 by mhummel           #+#    #+#             */
-/*   Updated: 2024/07/31 12:03:12 by mhummel          ###   ########.fr       */
+/*   Updated: 2024/08/01 11:53:35 by mhummel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	main(int argc, char **argv)
 	a = NULL;
 	b = NULL;
 	error = error_handling_input(argc, argv);
-	if (error || init_stack_a(&a, argc - 1) != 0)
+	if (error || init_stack_a(&a, argc, argv) != 0)
 		return (1);
 	if (!stack_sorted(a))
 	{
@@ -39,7 +39,7 @@ int	main(int argc, char **argv)
 		else if (stack_len(a) == 3)
 			sort_three(&a);
 		else
-			error = sort_stacks(&a, &b);
+			sort_stacks(&a, &b);
 	}
 	free_stack(&a);
 	free_stack(&b);

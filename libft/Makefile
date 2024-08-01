@@ -6,7 +6,7 @@
 #    By: mhummel <mhummel@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/13 11:03:31 by mhummel           #+#    #+#              #
-#    Updated: 2024/07/31 12:00:50 by mhummel          ###   ########.fr        #
+#    Updated: 2024/07/31 14:31:28 by mhummel          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,6 +49,7 @@ LIBFT_FILES =	ft_atoi.c \
 			ft_putstr_fd.c \
 			ft_putendl_fd.c \
 			ft_putnbr_fd.c \
+			ft_print_error.c \
 			ft_strmapi.c \
 			ft_striteri.c \
 			ft_split.c \

@@ -1,47 +1,45 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push.c                                             :+:      :+:    :+:   */
+/*   rotate.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mhummel <mhummel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/31 12:20:49 by mhummel           #+#    #+#             */
-/*   Updated: 2024/07/31 12:31:49 by mhummel          ###   ########.fr       */
+/*   Created: 2024/07/31 12:36:28 by mhummel           #+#    #+#             */
+/*   Updated: 2024/07/31 12:38:54 by mhummel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/push_swap.h"
 
-void	print_operation(const char *operation)
-{
-	ft_printf("%s\n", operation);
-}
-
-void	push(t_stack_node **dst, t_stack_node **src, char *operation)
+void	rotate(t_stack_node **stack, char *operation)
 {
 	t_stack_node	*tmp;
 
-	if (*src == NULL)
+	if (*stack == NULL || (*stack)->next == NULL)
 		return ;
-	tmp = *src;
-	*src = (*src)->next;
-	if (*src)
-		(*src)->prev = NULL;
-	tmp->next = *dst;
-	tmp->prev = NULL;
-	if (*dst)
-		(*dst)->prev = tmp;
-	*dst = tmp;
+	tmp = *stack;
+	*stack = (*stack)->next;
+	(*stack)->prev = NULL;
+	tmp->next = NULL;
+	tmp->prev = get_last_node(*stack);
+	tmp->prev->next = tmp;
 	if (operation)
-		print_op(operation);
+		print_operation(operation);
 }
 
-void	pa(t_stack_node **a, t_stack_node **b)
+void	ra(t_stack_node **a)
 {
-	push(a, b, "pa");
+	rotate(a, "ra");
 }
 
-void	pb(t_stack_node **a, t_stack_node **b)
+void	rb(t_stack_node **b)
 {
-	push(b, a, "pb");
+	rotate(b, "rb");
+}
+
+void	rr(t_stack_node **a, t_stack_node **b)
+{
+	rotate(a, NULL);
+	rotate(b, "rr");
 }
