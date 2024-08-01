@@ -6,28 +6,46 @@
 /*   By: mhummel <mhummel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 12:57:27 by mhummel           #+#    #+#             */
-/*   Updated: 2024/08/01 11:33:42 by mhummel          ###   ########.fr       */
+/*   Updated: 2024/08/01 12:05:36 by mhummel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/push_swap.h"
 
-int	init_stack_a(t_stack_node **a, int argc, char **argv)
+int init_stack_a(t_stack_node **a, int argc, char **argv)
 {
-	int		i;
-	long	nbr;
+    int i;
+    long nbr;
+    char **args;
 
-	i = 1;
-	while (i < argc)
-	{
-		if (check_overflow(argv[i]))
-			return (1);
-		nbr = ft_atol(argv[i]);
-		if (add_node(a, (int)nbr))
-			return (1);
-		i++;
-	}
-	return (0);
+    if (argc == 2)
+        args = ft_split(argv[1], ' ');
+    else
+        args = &argv[1];
+
+    i = 0;
+    while (args[i])
+    {
+        if (check_overflow(args[i]))
+        {
+            if (argc == 2)
+                free_split(args);
+            return (1);
+        }
+        nbr = ft_atol(args[i]);
+        if (add_node(a, (int)nbr))
+        {
+            if (argc == 2)
+                free_split(args);
+            return (1);
+        }
+        i++;
+    }
+
+    if (argc == 2)
+        free_split(args);
+
+    return (0);
 }
 
 int	add_node(t_stack_node **stack, int value)

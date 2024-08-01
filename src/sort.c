@@ -6,7 +6,7 @@
 /*   By: mhummel <mhummel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 13:16:03 by mhummel           #+#    #+#             */
-/*   Updated: 2024/08/01 11:53:24 by mhummel          ###   ########.fr       */
+/*   Updated: 2024/08/01 12:07:48 by mhummel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,6 @@ void	sort_stacks(t_stack_node **a, t_stack_node **b)
 	partition_stack(a, b, &info);
 	a_size = stack_len(*a);
 	b_size = stack_len(*b);
-	print_stack(*a);
-	print_stack(*b);
 	if (a_size > 3)
 		sort_stacks(a, b);
 	else
@@ -128,11 +126,9 @@ void	sort_b(t_stack_node **a, t_stack_node **b)
 	info.is_a = 0;
 	partition_stack(b, a, &info);
 	new_b_size = stack_len(*b);
-	new_a_size = stack_len(*a);
-	if (new_b_size > 3)
+	new_a_size = stack_len(*a) - (size - new_b_size);
+	if (new_b_size > 0)
 		sort_b(a, b);
-	else if (new_b_size > 0)
-		sort_small_b(a, b, new_b_size);
 	if (new_a_size > 3)
 		sort_stacks(a, b);
 	else if (new_a_size > 0)

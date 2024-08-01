@@ -6,7 +6,7 @@
 /*   By: mhummel <mhummel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 14:17:46 by mhummel           #+#    #+#             */
-/*   Updated: 2024/08/01 11:45:33 by mhummel          ###   ########.fr       */
+/*   Updated: 2024/08/01 12:07:31 by mhummel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,13 @@ void partition_stack(t_stack_node **src, t_stack_node **dst, t_partition_info *i
                 rb(src);
         }
         i++;
+    }
+    if (push_count == 0 && *src)
+    {
+        if (info->is_a)
+            pb(dst, src);
+        else
+            pa(dst, src);
     }
 }
 
