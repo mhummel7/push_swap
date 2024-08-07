@@ -6,7 +6,7 @@
 #    By: mhummel <mhummel@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/31 12:49:05 by mhummel           #+#    #+#              #
-#    Updated: 2024/07/31 14:58:48 by mhummel          ###   ########.fr        #
+#    Updated: 2024/08/08 01:11:07 by mhummel          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,17 +16,17 @@ LIBFT		:= ./libft
 
 HEADERS		:= -I ./include -I $(LIBFT)
 LIBS		:= $(LIBFT)/libft/libft.a
-SRCS		:= src/stack_ops/op_utils.c \
-				src/stack_ops/push.c \
+SRCS		:=	src/stack_ops/push.c \
 				src/stack_ops/reverse_rotate.c \
 				src/stack_ops/rotate.c \
 				src/stack_ops/swap.c \
 				src/main.c \
-				src/input.c \
 				src/stack_init.c \
 				src/stack_utils.c \
 				src/sort_utils.c \
-				src/sort.c
+				src/sort.c \
+				src/utils.c \
+				src/error.c
 OBJS		:= ${SRCS:.c=.o}
 
 all: libft $(NAME)

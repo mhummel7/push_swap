@@ -6,54 +6,51 @@
 /*   By: mhummel <mhummel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 13:15:51 by mhummel           #+#    #+#             */
-/*   Updated: 2024/08/01 11:20:18 by mhummel          ###   ########.fr       */
+/*   Updated: 2024/08/08 00:12:47 by mhummel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/push_swap.h"
 
-t_stack_node	*get_last_node(t_stack_node *stack)
+int	stack_sorted(t_stack *stack)
 {
-	if (stack == NULL)
-		return (NULL);
-	while (stack->next)
-		stack = stack->next;
-	return (stack);
-}
+	int	prev;
 
-int	stack_len(t_stack_node *stack)
-{
-	int	len;
-
-	len = 0;
+	if (!stack)
+		print_error(stack, NULL);
+	prev = stack->i;
+	stack = stack->next;
 	while (stack)
 	{
-		len++;
-		stack = stack->next;
-	}
-	return (len);
-}
-
-int	stack_sorted(t_stack_node *stack)
-{
-	while (stack && stack->next)
-	{
-		if (*(int *)(stack->nbr) > *(int *)(stack->next->nbr))
+		if (prev > stack->i)
 			return (0);
+		prev = stack->i;
 		stack = stack->next;
 	}
 	return (1);
 }
 
-void	free_stack(t_stack_node **stack)
+int	has_duplicates(t_stack *stack)
 {
-	t_stack_node	*tmp;
+	t_stack	*current;
+	t_stack	*next;
 
-	while (*stack)
+	current = stack;
+	while (current)
 	{
-		tmp = *stack;
-		*stack = (*stack)->next;
-		free(tmp->nbr);
-		free(tmp);
+		next = current->next;
+		while (next)
+		{
+			if (current->i == next->i)
+				return (1);
+			next = next->next;
+		}
+		current = current->next;
 	}
+	return (0);
+}
+
+int	check_error(t_stack *stack, char **tab, int i)
+{
+	return (not_number(tab, i) || has_duplicates(stack));
 }

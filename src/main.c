@@ -6,42 +6,56 @@
 /*   By: mhummel <mhummel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 11:32:15 by mhummel           #+#    #+#             */
-/*   Updated: 2024/08/01 11:53:35 by mhummel          ###   ########.fr       */
+/*   Updated: 2024/08/08 01:17:30 by mhummel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/push_swap.h"
 
-int	error_handling_input(int argc, char **argv)
+void	sort(int len, t_stack **stack_a, t_stack **stack_b)
 {
-	if (argc == 1 || (argc == 2 && !argv[1][0]))
-		return (1);
-	if (argc == 2)
-		return (handle_one_arg(argv[1]));
-	return (handle_multiple_args(argv));
+	if (has_duplicates(*stack_a))
+		print_error(*stack_a, NULL);
+	if (stack_sorted(*stack_a))
+		return ;
+	put_index(*stack_a);
+	if (len == 2)
+		sort_two(stack_a);
+	else if (len == 3)
+		sort_three(stack_a);
+	else if (len == 4)
+		sort_four(stack_a, stack_b);
+	else if (len == 5)
+		sort_five(stack_a, stack_b);
+	else
+		sort_all(stack_a, stack_b);
 }
 
 int	main(int argc, char **argv)
 {
-	t_stack_node	*a;
-	t_stack_node	*b;
-	int				error;
+	t_stack	*stack_a;
+	t_stack	*stack_b;
+	char	**tab;
 
-	a = NULL;
-	b = NULL;
-	error = error_handling_input(argc, argv);
-	if (error || init_stack_a(&a, argc, argv) != 0)
+	stack_a = NULL;
+	stack_b = NULL;
+	if (argc == 1)
 		return (1);
-	if (!stack_sorted(a))
+	if (argc == 2)
 	{
-		if (stack_len(a) == 2)
-			sa(&a);
-		else if (stack_len(a) == 3)
-			sort_three(&a);
-		else
-			sort_stacks(&a, &b);
+		tab = ft_split(argv[1], ' ');
+		if (not_number(tab, 0))
+			return (1);
+		stack_a = create_stack(stack_a, 0, tab, tab);
+		free_tab(tab);
 	}
-	free_stack(&a);
-	free_stack(&b);
-	return (error);
+	else
+	{
+		if (not_number(argv, 1))
+			return (1);
+		stack_a = create_stack(stack_a, 1, argv, NULL);
+	}
+	sort(stack_len(stack_a), &stack_a, &stack_b);
+	free_stack(stack_a);
+	exit(0);
 }

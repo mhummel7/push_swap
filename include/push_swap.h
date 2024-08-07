@@ -6,7 +6,7 @@
 /*   By: mhummel <mhummel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 12:35:39 by mhummel           #+#    #+#             */
-/*   Updated: 2024/08/01 11:28:19 by mhummel          ###   ########.fr       */
+/*   Updated: 2024/08/08 01:16:53 by mhummel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,90 +24,71 @@
 # include "../libft/get_next_line/get_next_line.h"
 # include "../libft/ft_printf/ft_printf.h"
 
-typedef struct s_stack_node
-{
-	void					*nbr;
-	int						index;
-	int						push_cost;
-	bool					above_median;
-	bool					cheapest;
-	struct s_stack_node		*target_node;
-	struct s_stack_node		*next;
-	struct s_stack_node		*prev;
-}	t_stack_node;
+typedef struct s_stack	t_stack;
 
-typedef struct s_partition_info
+struct s_stack
 {
-	int			median;
-	int			size;
-	int			is_a;
-}	t_partition_info;
+	int						i;
+	int						index;
+	t_stack					*next;
+};
 
 // ------<>------ Error handling------<>------
 
-int				error_handling_input(int argc, char **argv);
-void			print_stack(t_stack_node *stack);
+void		print_error(t_stack *stack, char **tab);
+void		free_stack(t_stack *stack);
+void		free_tab(char **tab);
 
 // ------<>------ Operations ------<>------
 
-void			print_operation(char *operation);
+void		pa(t_stack **a, t_stack **b);
+void		pb(t_stack **a, t_stack **b);
 
-void			push(t_stack_node **dst, t_stack_node **src, char *operation);
-void			pa(t_stack_node **a, t_stack_node **b);
-void			pb(t_stack_node **a, t_stack_node **b);
+void		sa(t_stack **a);
+void		sb(t_stack **b);
+void		ss(t_stack **a, t_stack **b);
 
-void			swap(t_stack_node **stack, char *operation);
-void			sa(t_stack_node **a);
-void			sb(t_stack_node **b);
-void			ss(t_stack_node **a, t_stack_node **b);
+void		ra(t_stack **a);
+void		rb(t_stack **b);
+void		rr(t_stack **a, t_stack **b);
 
-void			rotate(t_stack_node **stack, char *operation);
-void			ra(t_stack_node **a);
-void			rb(t_stack_node **b);
-void			rr(t_stack_node **a, t_stack_node **b);
-
-void			reverse_rotate(t_stack_node **stack, char *operation);
-void			rra(t_stack_node **a);
-void			rrb(t_stack_node **b);
-void			rrr(t_stack_node **a, t_stack_node **b);
+void		rra(t_stack **a);
+void		rrb(t_stack **b);
+void		rrr(t_stack **a, t_stack **b);
 
 // ------<>------  Stack initation ------<>------
 
-int				init_stack_a(t_stack_node **a, int argc, char **argv);
-int				add_node(t_stack_node **stack, int value);
+t_stack		*create_stack(t_stack *stack, int j, char **argv, char **tab);
+t_stack		*add_stack(t_stack *stack, char *c, char **tab);
+void		put_index(t_stack *stack);
 
 // ------<>------ Stack utils ------<>------
 
-t_stack_node	*get_last_node(t_stack_node *stack);
-int				stack_len(t_stack_node *stack);
-int				stack_sorted(t_stack_node *stack);
-void			free_stack(t_stack_node **stack);
+int			stack_sorted(t_stack *stack);
+int			has_duplicates(t_stack *stack);
+int			check_error(t_stack *stack, char **tab, int i);
 
-// ------<>------ Input------<>------
+// ------<>------ Utils ------<>------
 
-void			free_split(char **split);
-int				validate_arg(char *argv);
-int				check_overflow(char *argv);
-int				handle_one_arg(char *argv);
-int				handle_multiple_args(char **argv);
+int			not_number(char **tab, int i);
+int			ft_atoi_push_swap(char *str, t_stack *stack, char **tab);
+int			tab_len(char **tab);
 
 // ------<>------ Sort ------<>------
 
-void			sort_stacks(t_stack_node **a, t_stack_node **b);
-void			sort_three(t_stack_node **a);
-void			sort_b(t_stack_node **a, t_stack_node **b);
-void			sort_small_a(t_stack_node **a, int size);
-void			sort_small_b(t_stack_node **a, t_stack_node **b, int size);
-void			insertion_sort(t_stack_node **a);
+void		sort(int len, t_stack **stack_a, t_stack **stack_b);
+void		sort_two(t_stack **stack_a);
+void		sort_three(t_stack **stack_a);
+void		sort_four(t_stack **stack_a, t_stack **stack_b);
+void		sort_five(t_stack **stack_a, t_stack **stack_b);
+void		sort_all(t_stack **stack_a, t_stack **stack_b);
 
 // ------<>------ Sort Utils ------<>------
 
-void			ft_sort_int_arr(int *arr, int size);
-int				find_median(t_stack_node *stack, int size);
-t_stack_node	*find_largest(t_stack_node *stack);
-int				get_stack_position(t_stack_node *stack, t_stack_node *node);
-void			merge_stacks(t_stack_node **a, t_stack_node **b);
-void			partition_stack(t_stack_node **src, t_stack_node **dst,
-					t_partition_info *info);
+int			stack_len(t_stack *stack);
+int			get_biggest(t_stack *stack);
+int			get_smallest(t_stack *stack, int *i);
+t_stack		*get_last_node(t_stack *stack);
+t_stack		*get_before_last_node(t_stack *stack);
 
 #endif

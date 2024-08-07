@@ -6,40 +6,41 @@
 /*   By: mhummel <mhummel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 12:36:28 by mhummel           #+#    #+#             */
-/*   Updated: 2024/07/31 12:38:54 by mhummel          ###   ########.fr       */
+/*   Updated: 2024/08/08 00:50:30 by mhummel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/push_swap.h"
 
-void	rotate(t_stack_node **stack, char *operation)
+void	ra(t_stack **stack_a)
 {
-	t_stack_node	*tmp;
+	t_stack	*new_first;
+	t_stack	*temp;
 
-	if (*stack == NULL || (*stack)->next == NULL)
-		return ;
-	tmp = *stack;
-	*stack = (*stack)->next;
-	(*stack)->prev = NULL;
-	tmp->next = NULL;
-	tmp->prev = get_last_node(*stack);
-	tmp->prev->next = tmp;
-	if (operation)
-		print_operation(operation);
+	temp = *stack_a;
+	*stack_a = (*stack_a)->next;
+	new_first = get_last_node(*stack_a);
+	temp->next = NULL;
+	new_first->next = temp;
+	write(1, "ra\n", 3);
 }
 
-void	ra(t_stack_node **a)
+void	rb(t_stack **stack_b)
 {
-	rotate(a, "ra");
+	t_stack	*new_first;
+	t_stack	*temp;
+
+	temp = *stack_b;
+	*stack_b = (*stack_b)->next;
+	new_first = get_last_node(*stack_b);
+	temp->next = NULL;
+	new_first->next = temp;
+	write(1, "rb\n", 3);
 }
 
-void	rb(t_stack_node **b)
+void	rr(t_stack **stack_a, t_stack **stack_b)
 {
-	rotate(b, "rb");
-}
-
-void	rr(t_stack_node **a, t_stack_node **b)
-{
-	rotate(a, NULL);
-	rotate(b, "rr");
+	ra(stack_a);
+	rb(stack_b);
+	write(1, "rr\n", 3);
 }

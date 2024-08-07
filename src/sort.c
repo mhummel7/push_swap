@@ -6,181 +6,108 @@
 /*   By: mhummel <mhummel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 13:16:03 by mhummel           #+#    #+#             */
-/*   Updated: 2024/08/01 12:07:48 by mhummel          ###   ########.fr       */
+/*   Updated: 2024/08/08 01:17:25 by mhummel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/push_swap.h"
 
-void	print_stack(t_stack_node *stack)
+void	sort_two(t_stack **stack_a)
 {
-	while (stack)
-		stack = stack->next;
+	if (!stack_sorted(*stack_a))
+		sa(stack_a);
 }
 
-void	sort_stacks(t_stack_node **a, t_stack_node **b)
-{
-	int					size;
-	t_partition_info	info;
-	int					a_size;
-	int					b_size;
-
-	size = stack_len(*a);
-	if (size <= 3)
-	{
-		sort_small_a(a, size);
-		return ;
-	}
-	info.median = find_median(*a, size);
-	info.size = size;
-	info.is_a = 1;
-	partition_stack(a, b, &info);
-	a_size = stack_len(*a);
-	b_size = stack_len(*b);
-	if (a_size > 3)
-		sort_stacks(a, b);
-	else
-		sort_small_a(a, a_size);
-	if (b_size > 0)
-		sort_b(a, b);
-	merge_stacks(a, b);
-}
-
-void	sort_three(t_stack_node **a)
+void	sort_three(t_stack **stack_a)
 {
 	int	first;
 	int	second;
 	int	third;
 
-	first = *(int *)(*a)->nbr;
-	second = *(int *)(*a)->next->nbr;
-	third = *(int *)(*a)->next->next->nbr;
+	first = (*stack_a)->i;
+	second = (*stack_a)->next->i;
+	third = (*stack_a)->next->next->i;
 	if (first > second && second < third && first < third)
-		sa(a);
-	else if (first > second && second > third)
+		sa(stack_a);
+	if (first > second && second < third && first > third)
+		ra(stack_a);
+	if (first < second && second > third && first > third)
+		rra(stack_a);
+	if (first > second && second > third && first > third)
 	{
-		sa(a);
-		rra(a);
+		sa(stack_a);
+		rra(stack_a);
 	}
-	else if (first > second && second < third && first > third)
-		ra(a);
-	else if (first < second && second > third && first < third)
+	if (first < second && second > third && first < third)
 	{
-		sa(a);
-		ra(a);
-	}
-	else if (first < second && second > third && first > third)
-		rra(a);
-}
-
-void	sort_small_b(t_stack_node **a, t_stack_node **b, int size)
-{
-	if (size == 1)
-		pa(a, b);
-	else if (size == 2)
-	{
-		if (*(int *)(*b)->nbr < *(int *)(*b)->next->nbr)
-			sb(b);
-		pa(a, b);
-		pa(a, b);
-	}
-	else if (size == 3)
-	{
-		if (*(int *)(*b)->nbr > *(int *)(*b)->next->nbr
-			&& *(int *)(*b)->nbr > *(int *)(*b)->next->next->nbr)
-			rb(b);
-		else if (*(int *)(*b)->next->nbr > *(int *)(*b)->nbr
-			&& *(int *)(*b)->next->nbr > *(int *)(*b)->next->next->nbr)
-			rrb(b);
-		if (*(int *)(*b)->nbr < *(int *)(*b)->next->nbr)
-			sb(b);
-		pa(a, b);
-		pa(a, b);
-		pa(a, b);
+		sa(stack_a);
+		ra(stack_a);
 	}
 }
 
-void	sort_small_a(t_stack_node **a, int size)
+void	sort_four(t_stack **stack_a, t_stack **stack_b)
 {
-	if (size == 2 && *(int *)(*a)->nbr > *(int *)(*a)->next->nbr)
-		sa(a);
-	else if (size == 3)
-		sort_three(a);
-}
+	int	i;
+	int	smallest;
 
-void	sort_b(t_stack_node **a, t_stack_node **b)
-{
-	int					size;
-	t_partition_info	info;
-	int					new_b_size;
-	int					new_a_size;
-
-	size = stack_len(*b);
-	if (size <= 3)
+	i = 1;
+	smallest = get_smallest(*stack_a, &i);
+	while ((*stack_a)->i > smallest)
 	{
-		sort_small_b(a, b, size);
-		return ;
-	}
-	info.median = find_median(*b, size);
-	info.size = size;
-	info.is_a = 0;
-	partition_stack(b, a, &info);
-	new_b_size = stack_len(*b);
-	new_a_size = stack_len(*a) - (size - new_b_size);
-	if (new_b_size > 0)
-		sort_b(a, b);
-	if (new_a_size > 3)
-		sort_stacks(a, b);
-	else if (new_a_size > 0)
-		sort_small_a(a, new_a_size);
-}
-
-void	insertion_sort(t_stack_node **a)
-{
-	t_stack_node	*sorted;
-	t_stack_node	*current;
-	t_stack_node	*tmp;
-
-	sorted = NULL;
-	while (*a)
-	{
-		current = *a;
-		*a = (*a)->next;
-		current->next = NULL;
-		if (sorted == NULL || *(int *)current->nbr < *(int *)sorted->nbr)
-		{
-			current->next = sorted;
-			sorted = current;
-		}
+		if (i < 3)
+			ra(stack_a);
 		else
-		{
-			tmp = sorted;
-			while (tmp->next && *(int *)current->nbr > *(int *)tmp->next->nbr)
-				tmp = tmp->next;
-			current->next = tmp->next;
-			tmp->next = current;
-		}
+			rra(stack_a);
 	}
-	*a = sorted;
+	pb(stack_a, stack_b);
+	sort_three(stack_a);
+	pa(stack_a, stack_b);
 }
 
-void	swap_nodes(t_stack_node **head, t_stack_node *a, t_stack_node *b)
+void	sort_five(t_stack **stack_a, t_stack **stack_b)
 {
-	t_stack_node *prev_a = NULL;
-	t_stack_node *temp = *head;
+	int	i;
+	int	smallest;
 
-	while (temp != a)
+	i = 1;
+	smallest = get_smallest(*stack_a, &i);
+	while ((*stack_a)->i > smallest)
 	{
-		prev_a = temp;
-		temp = temp->next;
+		if (i < 3)
+			ra(stack_a);
+		else
+			rra(stack_a);
 	}
+	pb(stack_a, stack_b);
+	sort_four(stack_a, stack_b);
+	pa(stack_a, stack_b);
+}
 
-	if (prev_a)
-		prev_a->next = b;
-	else
-		*head = b;
+void	sort_all(t_stack **stack_a, t_stack **stack_b)
+{
+	int	biggest;
+	int	size;
+	int	i;
+	int	j;
+	int	b;
 
-	temp = b->next;
-	b->next = a;
-	a->next = temp;
+	b = 0;
+	i = -1;
+	biggest = get_biggest(*stack_a);
+	size = stack_len(*stack_a);
+	while (((biggest) >> b) != 0)
+		b++;
+	while (++i < b)
+	{
+		j = -1;
+		while (++j < size)
+		{
+			if ((((*stack_a)->index >> i) & 1) == 1)
+				ra(stack_a);
+			else
+				pb(stack_a, stack_b);
+		}
+		while (stack_len(*stack_b))
+			pa(stack_a, stack_b);
+	}
 }

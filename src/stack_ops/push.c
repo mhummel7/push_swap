@@ -6,44 +6,30 @@
 /*   By: mhummel <mhummel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 12:20:49 by mhummel           #+#    #+#             */
-/*   Updated: 2024/08/01 11:41:29 by mhummel          ###   ########.fr       */
+/*   Updated: 2024/08/08 00:42:52 by mhummel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/push_swap.h"
 
-void	pb(t_stack_node **b, t_stack_node **a)
+void	pa(t_stack **stack_a, t_stack **stack_b)
 {
-	t_stack_node	*tmp;
+	t_stack	*tmp;
 
-	if (*a == NULL)
-		return ;
-	tmp = *a;
-	*a = (*a)->next;
-	if (*a)
-		(*a)->prev = NULL;
-	tmp->next = *b;
-	tmp->prev = NULL;
-	if (*b)
-		(*b)->prev = tmp;
-	*b = tmp;
-	printf("pb\n");
+	tmp = *stack_b;
+	*stack_b = (*stack_b)->next;
+	tmp->next = *stack_a;
+	*stack_a = tmp;
+	write(1, "pa\n", 3);
 }
 
-void	pa(t_stack_node **a, t_stack_node **b)
+void	pb(t_stack **stack_a, t_stack **stack_b)
 {
-	t_stack_node	*tmp;
+	t_stack	*tmp;
 
-	if (*b == NULL)
-		return ;
-	tmp = *b;
-	*b = (*b)->next;
-	if (*b)
-		(*b)->prev = NULL;
-	tmp->next = *a;
-	tmp->prev = NULL;
-	if (*a)
-		(*a)->prev = tmp;
-	*a = tmp;
-	printf("pa\n");
+	tmp = *stack_a;
+	*stack_a = (*stack_a)->next;
+	tmp->next = *stack_b;
+	*stack_b = tmp;
+	write(1, "pb\n", 3);
 }
