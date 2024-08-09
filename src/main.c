@@ -6,7 +6,7 @@
 /*   By: mhummel <mhummel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 11:32:15 by mhummel           #+#    #+#             */
-/*   Updated: 2024/08/09 12:17:25 by mhummel          ###   ########.fr       */
+/*   Updated: 2024/08/09 14:27:22 by mhummel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,8 @@ int	check_argument(char *arg)
 	{
 		if (arg[i] == ' ')
 			i++;
-		else if ((arg[i] == '+' || arg[i] == '-') &&
-				(i == 0 || arg[i - 1] == ' ') &&
-				ft_isdigit(arg[i + 1]))
+		else if ((arg[i] == '+' || arg[i] == '-') && (i == 0 || arg[i
+					- 1] == ' ') && ft_isdigit(arg[i + 1]))
 			i++;
 		else if (ft_isdigit(arg[i]))
 		{

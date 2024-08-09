@@ -6,7 +6,7 @@
 /*   By: mhummel <mhummel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 23:20:21 by mhummel           #+#    #+#             */
-/*   Updated: 2024/08/09 12:21:24 by mhummel          ###   ########.fr       */
+/*   Updated: 2024/08/09 14:27:04 by mhummel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	free_tab(char **tab)
 	int	i;
 
 	if (!tab)
-		return;
+		return ;
 	i = 0;
 	while (tab[i])
 	{
