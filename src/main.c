@@ -6,7 +6,7 @@
 /*   By: mhummel <mhummel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 11:32:15 by mhummel           #+#    #+#             */
-/*   Updated: 2024/08/08 01:17:30 by mhummel          ###   ########.fr       */
+/*   Updated: 2024/08/09 12:17:25 by mhummel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,34 @@ void	sort(int len, t_stack **stack_a, t_stack **stack_b)
 		sort_all(stack_a, stack_b);
 }
 
+int	check_argument(char *arg)
+{
+	int	i;
+	int	has_digit;
+
+	if (!arg || arg[0] == '\0')
+		return (0);
+	i = 0;
+	has_digit = 0;
+	while (arg[i])
+	{
+		if (arg[i] == ' ')
+			i++;
+		else if ((arg[i] == '+' || arg[i] == '-') &&
+				(i == 0 || arg[i - 1] == ' ') &&
+				ft_isdigit(arg[i + 1]))
+			i++;
+		else if (ft_isdigit(arg[i]))
+		{
+			has_digit = 1;
+			i++;
+		}
+		else
+			return (0);
+	}
+	return (has_digit);
+}
+
 int	main(int argc, char **argv)
 {
 	t_stack	*stack_a;
@@ -43,16 +71,16 @@ int	main(int argc, char **argv)
 		return (1);
 	if (argc == 2)
 	{
+		if (!check_argument(argv[1]))
+			print_error(NULL, NULL);
 		tab = ft_split(argv[1], ' ');
-		if (not_number(tab, 0))
-			return (1);
 		stack_a = create_stack(stack_a, 0, tab, tab);
 		free_tab(tab);
 	}
 	else
 	{
-		if (not_number(argv, 1))
-			return (1);
+		if (!check_argument(argv[1]))
+			print_error(NULL, NULL);
 		stack_a = create_stack(stack_a, 1, argv, NULL);
 	}
 	sort(stack_len(stack_a), &stack_a, &stack_b);

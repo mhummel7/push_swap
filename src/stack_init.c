@@ -6,7 +6,7 @@
 /*   By: mhummel <mhummel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 12:57:27 by mhummel           #+#    #+#             */
-/*   Updated: 2024/08/08 01:16:07 by mhummel          ###   ########.fr       */
+/*   Updated: 2024/08/09 12:15:20 by mhummel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,12 @@ t_stack	*create_stack(t_stack *stack, int j, char **argv, char **tab)
 	while (i >= j)
 	{
 		stack = add_stack(stack, argv[i], tab);
+		if (!stack)
+		{
+			print_error(stack, tab);
+			free_stack(stack);
+			return (NULL);
+		}
 		i--;
 	}
 	return (stack);
